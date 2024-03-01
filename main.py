@@ -92,7 +92,8 @@ while True:
 
   if old_message != message:
     old_message = message
-    client.publish('inTopic', '1')
+    if 'pasundo' in message['value'].strip().lower():
+	    client.publish('inTopic', f"{recent_sender} [{date_and_time}],{message['value']}")
     print(f"{recent_sender} [{date_and_time}]: {message["value"]}")
    
   if message["value"].lower().strip() == "exit":
@@ -103,3 +104,4 @@ driver.quit()
 
 client.loop_stop()
 client.disconnect()
+
